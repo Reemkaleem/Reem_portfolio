@@ -44,25 +44,29 @@ export default function ReemPortfolio() {
   const [selectedAchievement, setSelectedAchievement] = useState<number | null>(null)
 
   const scrollToSection = (sectionId: string) => {
+    console.log("[v0] Attempting to scroll to section:", sectionId)
     const element = document.getElementById(sectionId)
     if (element) {
+      console.log("[v0] Element found, scrolling...")
       element.scrollIntoView({
         behavior: "smooth",
         block: "start",
       })
+    } else {
+      console.log("[v0] Element not found with ID:", sectionId)
     }
   }
 
   const aboutImages = [
-    { src: "/placeholder-hackathon1.jpeg", caption: "CodeBattle Hackathon - Showcasing innovative solutions" },
-    { src: "/placeholder-hackathon2.jpeg", caption: "Tech Avishkar 2.0 - National Hackathon Organization" },
+    { src: "/placeholder-hackathon2.jpeg", caption: "CodeBattle Hackathon - Showcasing innovative solutions" },
+    { src: "/placeholder-hackathon1.jpeg", caption: "Tech Avishkar 2.0 - National Hackathon Organization" },
     { src: "/placeholder-hackathon3.jpeg", caption: "IET Weekly Activity - Technical workshops and learning" },
     { src: "/placeholder-hackathon4.png", caption: "Best Volunteer for IET Summit - Leadership in education" },
   ]
 
   const projects = [
     {
-      title: "Personal Loan Eligibility Prediction System",
+      title: "Loan Eligibility Prediction System",
       description:
         "Production-grade ML pipeline to predict loan approvals with comprehensive data preprocessing, feature engineering, and model validation. Implemented automated model monitoring and drift detection using Deepchecks framework.",
       tech: [
@@ -78,10 +82,11 @@ export default function ReemPortfolio() {
       ],
       metrics: "AUC: 0.89, F1-Score: 0.82, 94% Precision",
       date: "06/2025",
+      link: "https://loan-prediction-demo.vercel.app",
       github: "https://github.com/Reemkaleem/Loan_Eligibility_Classification",
       details:
         "Built end-to-end ML pipeline with automated feature selection, hyperparameter tuning, and model deployment. Integrated with Supabase for real-time data storage and Flask API for seamless frontend integration.",
-      image: "/personal-loan-eligibility-explained-in-simple-terms_blog_1757931218.png",
+      image: "/placeholder-lg5yl.jpg",
     },
     {
       title: "StreeRaksha - Women's Safety System",
@@ -90,7 +95,8 @@ export default function ReemPortfolio() {
       tech: ["Python", "YOLOv5", "DeepSORT", "FastAPI", "Firebase", "Supabase", "OpenCV", "WebRTC", "Twilio"],
       metrics: "Real-time processing, 95% Detection Accuracy",
       date: "04/2025",
-      github: "https://github.com/Reemkaleem/StreeRaksha_Dashboard",
+      link: "https://streeraksha-demo.vercel.app",
+      github: "https://github.com/Reemkaleem/Dashboard-StreeRaksha1806",
       details:
         "Developed computer vision system for real-time crowd analysis and threat detection. Integrated SMS/email alerts, GPS tracking, and emergency contact system with 24/7 monitoring dashboard.",
       image: "/placeholder-rn22z.jpeg",
@@ -102,6 +108,7 @@ export default function ReemPortfolio() {
       tech: ["Python", "TensorFlow", "Keras", "VGG-19", "CNN", "OpenCV", "Matplotlib", "NumPy"],
       metrics: "95.75% Test Accuracy, 97% Sensitivity",
       date: "02/2025",
+      link: "https://lung-classification-demo.vercel.app",
       github: "https://github.com/Reemkaleem/Lung_disease_classifier",
       details:
         "Created medical imaging AI system with comprehensive preprocessing pipeline, data augmentation techniques, and model interpretability using Grad-CAM for clinical decision support.",
@@ -184,15 +191,6 @@ export default function ReemPortfolio() {
       color: "text-orange-400",
       image: "/placeholder-e3po6.jpeg",
     },
-    {
-      title: "Best Volunteer for IET Summit",
-      organization: "IET ATME College of Engineering",
-      date: "2025",
-      type: "leadership",
-      icon: <Users className="w-6 h-6" />,
-      color: "text-blue-400",
-      image: "/placeholder-hackathon4.png",
-    },
   ]
 
   const educationTimeline = [
@@ -265,17 +263,13 @@ export default function ReemPortfolio() {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        {/* Removed background circles for cleaner look */}
       </div>
+
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">R</span>
-              </div>
               <div className="text-xl font-bold text-primary">Reem Kaleem</div>
             </div>
             <div className="hidden md:flex items-center space-x-6">
@@ -292,7 +286,8 @@ export default function ReemPortfolio() {
               </div>
               <ThemeToggle />
             </div>
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center space-x-2">
+              <ThemeToggle />
               <Button
                 variant="ghost"
                 size="sm"
@@ -328,9 +323,6 @@ export default function ReemPortfolio() {
                     {item}
                   </button>
                 ))}
-                <div className="pt-3 border-t border-border">
-                  <ThemeToggle />
-                </div>
               </div>
             </div>
           )}
@@ -342,10 +334,10 @@ export default function ReemPortfolio() {
 
       <div className="pt-16">
         {/* Home/Hero Section */}
-        <section id="home" className="py-16 px-4 sm:px-6">
+        <section id="home" className="py-4 px-4 sm:px-6">
           <div className="container mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[85vh] max-w-6xl mx-auto">
-              <div className="space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+              <div className="space-y-4 lg:space-y-6 text-center lg:text-left order-2 lg:order-2">
                 <div className="space-y-4">
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-balance">
                     <TypingAnimation 
@@ -411,87 +403,59 @@ export default function ReemPortfolio() {
                     <GraduationCap className="w-4 h-4" />
                     ATME College
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Trophy className="w-4 h-4" />
-                    CGPA: 9.15/10
-                  </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                <div className="flex justify-center lg:justify-start space-x-6">
                   <Button
                     size="lg"
-                    className="bg-primary hover:bg-primary/90 cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-primary hover:bg-primary/90 cursor-pointer"
                     onClick={() => scrollToSection("projects")}
                   >
-                    <Code className="w-4 h-4 mr-2" />
                     View Projects
                   </Button>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300"
-                    onClick={() => window.open("/resume", "_blank")}
+                    className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent cursor-pointer"
+                    onClick={() => scrollToSection("contact")}
                   >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Download Resume
+                    Contact Me
                   </Button>
                 </div>
               </div>
+            </div>
 
-              <div className="flex justify-center lg:justify-center order-1 lg:order-2">
-                <div className="relative">
-                  {/* Animated background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-full blur-3xl animate-pulse"></div>
-                  
-                  {/* Profile image */}
-                  <div className="relative z-10 animate-float">
-                    <div className="relative group">
-                      <Image
-                        src="/placeholder-user-photo.jpeg"
-                        alt="Reem Kaleem"
-                        width={280}
-                        height={280}
-                        className="sm:w-[320px] sm:h-[320px] lg:w-[350px] lg:h-[350px] rounded-full border-4 border-primary/30 shadow-2xl shadow-primary/20 group-hover:border-primary/50 transition-all duration-300"
-                        priority
-                      />
-                    </div>
-                  </div>
-
-                  {/* Decorative elements */}
-                  <div className="absolute top-10 -left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
-                  <div className="absolute bottom-10 -right-10 w-16 h-16 bg-secondary/10 rounded-full blur-xl animate-pulse" style={{animationDelay: '2s'}}></div>
-                </div>
-              </div>
+            {/* Profile Image */}
+            <div className="w-72 h-72 lg:w-80 lg:h-80 relative flex-shrink-0 order-1 lg:order-1">
+              <img
+                src="/placeholder-user-photo.jpeg"
+                alt="Reem Kaleem"
+                className="w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-800 shadow-2xl"
+              />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* About Section */}
-        <section id="about" className="py-16 sm:py-20 px-4 sm:px-6">
-          <div className="container mx-auto">
-            <div className="max-w-6xl mx-auto space-y-8 sm:space-y-12">
+      {/* About Section */}
+      <section id="about" className="py-4 sm:py-6 px-4 sm:px-6">
+        <div className="container mx-auto">
+          <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6">
               <div className="text-center space-y-4">
                 <h2 className="text-3xl sm:text-4xl font-bold text-balance">About Me</h2>
                 <p className="text-base sm:text-lg text-muted-foreground text-pretty max-w-3xl mx-auto">
-                  I'm a passionate Computer Science Engineering student specializing in Artificial Intelligence and 
-                  Machine Learning, driven by the vision of creating AI systems that make a meaningful impact on society. 
-                  My journey combines academic excellence with hands-on innovation.
+                  I'm a dedicated Computer Science Engineering student specializing in Artificial Intelligence and
+                  Machine Learning, with a passion for creating intelligent systems that make a positive impact.
                 </p>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div className="space-y-6 order-2 lg:order-1">
-                  <h3 className="text-xl sm:text-2xl font-bold text-primary">My Passion & Vision</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-primary">My Journey</h3>
                   <p className="text-muted-foreground">
-                    My fascination with AI began with a simple question: "How can we make machines understand and solve 
-                    real-world problems?" This curiosity led me to dive deep into Computer Vision, Machine Learning, and 
-                    edge computing. From organizing national hackathons to developing production-ready AI systems, 
-                    I've been on a mission to bridge the gap between cutting-edge research and practical applications.
-                  </p>
-                  <p className="text-muted-foreground">
-                    Every project I work on is driven by impact - whether it's improving healthcare with medical imaging AI, 
-                    enhancing safety through intelligent surveillance, or democratizing access to AI-powered solutions. 
-                    I believe technology should empower people and solve meaningful problems.
+                    From organizing national hackathons to developing AI solutions, I've been actively involved in the
+                    tech community. My experience spans from leading technical events to building production-ready
+                    machine learning systems.
                   </p>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
@@ -504,20 +468,18 @@ export default function ReemPortfolio() {
                     </div>
                     <div className="flex items-center gap-3">
                       <Users className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span className="text-sm sm:text-base">Best Volunteer at IET Summit</span>
+                      <span className="text-sm sm:text-base">Documentation Head at IET ATME College</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="relative order-1 lg:order-2">
-                  <div className="relative h-64 sm:h-80 overflow-hidden rounded-lg border border-primary/20 bg-black">
+                  <div className="relative h-64 sm:h-80 overflow-hidden rounded-lg border border-primary/20">
                     <Image
                       src={aboutImages[currentAboutImage].src || "/placeholder.svg"}
                       alt={aboutImages[currentAboutImage].caption}
                       fill
-                      className="object-contain transition-all duration-500 ease-in-out hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={currentAboutImage === 0}
+                      className="object-cover"
                     />
                   </div>
                   <p className="text-center text-xs sm:text-sm text-muted-foreground mt-2">
@@ -573,9 +535,7 @@ export default function ReemPortfolio() {
                           <Card
                             className={`bg-card/50 border-primary/20 cursor-pointer transition-all duration-300 hover:scale-105 ${
                               selectedEducation === index ? "border-primary ring-2 ring-primary/20 bg-card/80" : ""
-                            } ${edu.current ? "border-primary ring-2 ring-primary/20" : ""} ${
-                              edu.featured ? "border-secondary ring-2 ring-secondary/30 bg-gradient-to-br from-primary/10 to-secondary/10" : ""
-                            }`}
+                            } ${edu.current ? "border-primary ring-2 ring-primary/20" : ""}`}
                             onClick={() => setSelectedEducation(index)}
                           >
                             <CardContent className="p-4">
@@ -680,13 +640,12 @@ export default function ReemPortfolio() {
                   {projects.map((project, index) => (
                     <div key={index} className="w-full flex-shrink-0 px-2 sm:px-4">
                       <Card className="bg-card/50 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                        <div className="relative h-40 sm:h-48 overflow-hidden rounded-t-lg bg-black">
+                        <div className="relative h-40 sm:h-48 overflow-hidden rounded-t-lg">
                           <Image
                             src={project.image || "/placeholder.svg"}
                             alt={project.title}
                             fill
-                            className="object-contain transition-all duration-300 hover:scale-105"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+                            className="object-cover"
                           />
                         </div>
                         <CardHeader className="p-4 sm:p-6">
@@ -777,9 +736,9 @@ export default function ReemPortfolio() {
         <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6">
           <div className="container mx-auto">
             <div className="text-center space-y-4 mb-12 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl font-bold text-balance">Skills & Expertise</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-balance">Skills & Technologies</h2>
               <p className="text-base sm:text-lg text-muted-foreground text-pretty">
-                Technologies and tools I use to build intelligent systems and solve complex problems
+                Technical expertise across AI/ML, programming languages, and development tools
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
@@ -943,67 +902,55 @@ export default function ReemPortfolio() {
         {/* Contact Section */}
         <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6">
           <div className="container mx-auto">
-            <div className="max-w-2xl mx-auto text-center space-y-8">
+            <div className="max-w-4xl mx-auto text-center space-y-8">
               <h2 className="text-3xl sm:text-4xl font-bold text-balance">Let's Build Something Amazing</h2>
               <p className="text-base sm:text-lg text-muted-foreground text-pretty">
                 I'm always excited to discuss innovative AI projects, collaborate on cutting-edge research, or explore 
                 how we can leverage technology to solve real-world challenges. Let's connect and create impact together!
               </p>
 
-                <div className="grid lg:grid-cols-2 gap-8 mt-8 sm:mt-12">
-                  <div className="space-y-6">
-                    <Card className="bg-card/50 border-primary/20">
-                      <CardContent className="p-4 sm:p-6 text-center">
-                        <Mail className="w-6 sm:w-8 h-6 sm:h-8 text-primary mx-auto mb-4" />
-                        <h3 className="font-semibold text-card-foreground mb-2">Email</h3>
-                        <p className="text-card-foreground/80 text-sm sm:text-base">reemk3103@gmail.com</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                  <ContactForm />
-                </div>              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6 sm:mt-8">
-                <Button
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90"
-                  onClick={() => window.open("mailto:reemk3103@gmail.com")}
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Send Email
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent"
-                  onClick={() => window.open("https://www.linkedin.com/in/reem-k-184153248/", "_blank")}
-                >
-                  <Linkedin className="w-4 h-4 mr-2" />
-                  Connect on LinkedIn
-                </Button>
-              </div>
+              <div className="grid lg:grid-cols-2 gap-8 mt-12">
+                {/* Contact Form */}
+                <ContactForm />
 
-              <div className="flex justify-center space-x-6 mt-6 sm:mt-8">
-                <a
-                  href="https://github.com/Reemkaleem"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Github className="w-6 sm:w-8 h-6 sm:h-8" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/reem-k-184153248/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Linkedin className="w-6 sm:w-8 h-6 sm:h-8" />
-                </a>
-                <a
-                  href="mailto:reemk3103@gmail.com"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Mail className="w-6 sm:w-8 h-6 sm:h-8" />
-                </a>
+                {/* Contact Info */}
+                <div className="space-y-6">
+                  <Card className="bg-card/50 border-primary/20">
+                    <CardContent className="p-6 text-center">
+                      <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
+                      <h3 className="font-semibold text-card-foreground mb-2">Email</h3>
+                      <p className="text-card-foreground/80">reemk3103@gmail.com</p>
+                      <Button
+                        className="mt-4 bg-primary hover:bg-primary/90"
+                        onClick={() => window.open("mailto:reemk3103@gmail.com")}
+                      >
+                        <Mail className="w-4 h-4 mr-2" />
+                        Send Email
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  <div className="flex justify-center space-x-4">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
+                      onClick={() => window.open("https://www.linkedin.com/in/reem-k-184153248/", "_blank")}
+                    >
+                      <Linkedin className="w-4 h-4 mr-2" />
+                      LinkedIn
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                      onClick={() => window.open("https://github.com/Reemkaleem", "_blank")}
+                    >
+                      <Github className="w-4 h-4 mr-2" />
+                      GitHub
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1012,36 +959,25 @@ export default function ReemPortfolio() {
 
       {/* Achievement Modal */}
       {selectedAchievement !== null && (
-        <div 
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={closeModal}
-        >
-          <div 
-            className="relative bg-background rounded-lg max-w-4xl max-h-[90vh] w-full overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 z-10 w-8 h-8 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-background transition-colors"
-            >
-              <span className="text-xl">&times;</span>
-            </button>
-            
-            {/* Modal content */}
-            <div className="flex flex-col md:flex-row h-full">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-background border border-border rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex flex-col md:flex-row">
               {/* Image section */}
-              <div className="flex-1 bg-black flex items-center justify-center p-4 min-h-[300px] md:min-h-[500px]">
-                <div className="relative w-full h-full max-w-2xl max-h-96 md:max-h-full">
-                  <Image
-                    src={achievements[selectedAchievement].image || "/placeholder.svg"}
-                    alt={achievements[selectedAchievement].title}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 80vw"
-                    priority
-                  />
-                </div>
+              <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
+                <button
+                  onClick={closeModal}
+                  className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background text-foreground rounded-full p-2 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4 rotate-45" />
+                </button>
+                <Image
+                  src={achievements[selectedAchievement].image || "/placeholder.svg"}
+                  alt={achievements[selectedAchievement].title}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 80vw"
+                  priority
+                />
               </div>
               
               {/* Details section */}

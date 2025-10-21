@@ -11,7 +11,6 @@ interface TypingAnimationProps {
 export function TypingAnimation({ text, duration = 50, className = "" }: TypingAnimationProps) {
   const [displayText, setDisplayText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
     if (currentIndex < text.length) {
@@ -21,15 +20,13 @@ export function TypingAnimation({ text, duration = 50, className = "" }: TypingA
       }, duration)
 
       return () => clearTimeout(timeout)
-    } else {
-      setIsComplete(true)
     }
   }, [currentIndex, duration, text])
 
   return (
     <span className={className}>
       {displayText}
-      {!isComplete && <span className="animate-pulse">|</span>}
+      <span className="animate-pulse">|</span>
     </span>
   )
 }
@@ -55,10 +52,7 @@ export function MultiTypingAnimation({
   const [displayText, setDisplayText] = useState("")
 
   useEffect(() => {
-    // Safety check to ensure texts array exists and has content
-    if (!texts || texts.length === 0) return
-    
-    const currentText = texts[currentTextIndex] || ""
+    const currentText = texts[currentTextIndex]
     
     const timeout = setTimeout(() => {
       if (!isDeleting) {

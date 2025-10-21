@@ -11,25 +11,18 @@ export default function Icon() {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)',
+          fontSize: 24,
+          background: 'linear-gradient(90deg, #ea580c 0%, #f59e0b 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: 6,
+          color: 'white',
+          fontWeight: 'bold',
         }}
       >
-        <div
-          style={{
-            color: 'white',
-            fontSize: 18,
-            fontWeight: 'bold',
-            fontFamily: 'system-ui',
-          }}
-        >
-          R
-        </div>
+        R
       </div>
     ),
     {
